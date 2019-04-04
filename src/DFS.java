@@ -392,11 +392,6 @@ public class DFS
     	//TODO:
     	//Accept .mp3 files
 
-        // DONE:
-        // Accept music.json
-        // Write Metadata
-        // Write Pages
-
         //DEBUG
         String TAG = "DFS.create";
         System.out.println(TAG + "(" + fileName + ")");
@@ -491,8 +486,6 @@ public class DFS
         //DEBUG
         String TAG = "loadCatalog";
         System.out.println(TAG + "(" + fileName + ")" );
-
-        //String full_path = "./assets/music.json"
 
         // Try to open the file for reading
         try {
@@ -627,8 +620,7 @@ public class DFS
     		System.out.println(TAG + ": read metadata"); // DEBUG
 	    	FilesJson files = readMetaData();
 
-	    	// Find music.json in metadata
-	    	System.out.println(TAG + ": Find music.json in metadata"); // DEBUG
+	    	System.out.println(TAG + ": Use first file in metadata"); // DEBUG
     		FileJson file = files.getFile(0);
     		System.out.println(TAG + ": file.getNumberOfPages(): "  + file.getNumberOfPages() ); // DEBUG
 
@@ -636,14 +628,14 @@ public class DFS
 	    	//Find count number of songs
 	    	int songs_found = 0;
 
-			//search page by page in music.json
+			//search page by page in file
 	    	System.out.println(TAG + ": searching pages..."); // DEBUG
 			for(int index = 0 ; index < file.getNumberOfPages(); index++)
 			{
 	    		System.out.println("\tpage: " + index); // DEBUG
 
 				//request page
-				CatalogPage catalogpage = getCatalogPage(index);// TODO: replace with direct reference
+				CatalogPage catalogpage = getCatalogPage(file.name, index);// TODO: replace with direct reference
 
 				//search each item in the catalogpage
 				for(int j = 0 ; j < catalogpage.size(); j++)
@@ -697,7 +689,7 @@ public class DFS
         }
     }
 
-    public CatalogPage getCatalogPage(int pageNumber)
+    public CatalogPage getCatalogPage(String filename, int pageNumber)
     {
     	String TAG = "getCatalogPage";
 		//System.out.println(TAG + "(pageNumber)" ); // DEBUG
@@ -705,7 +697,7 @@ public class DFS
 
     	try{
     		//Remote Input File Stream
-		    RemoteInputFileStream dataraw = this.read("music.json", pageNumber);
+		    RemoteInputFileStream dataraw = this.read(filename, pageNumber);
 		    //System.out.println("\t"+ TAG+":connecting."); // DEBUG
 		    dataraw.connect();
 

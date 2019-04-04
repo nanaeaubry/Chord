@@ -7,7 +7,9 @@ import com.google.gson.JsonObject;
 
 public class DFSCommand
 {
-    DFS dfs;
+	private static final String ASSETS_MUSIC_JSON = "../assets/music.json";
+    
+	DFS dfs;
     Boolean initialized = false;
     Boolean running = true;
     String TAG = "DFSCommand"; // DEBUG
@@ -47,7 +49,7 @@ public class DFSCommand
             //pedro
             if (result[0].equals("create"))
             {
-                dfs.create("music.json");
+                dfs.create(ASSETS_MUSIC_JSON);
                 initialized = true;
             }
 
@@ -59,7 +61,7 @@ public class DFSCommand
 
             if (result[0].equals("delete"))
             {
-                dfs.delete("music.json");
+                dfs.delete(ASSETS_MUSIC_JSON);
             }
 
             if(result[0].equals("read"))
@@ -77,7 +79,7 @@ public class DFSCommand
                 System.out.println("reading page #" + pageNumber);
 
                 //Remote Input File Stream
-                RemoteInputFileStream dataraw = dfs.read("music.json", pageNumber);
+                RemoteInputFileStream dataraw = dfs.read(ASSETS_MUSIC_JSON, pageNumber);
                 System.out.println("\t"+ TAG+":connecting."); // DEBUG
                 dataraw.connect();
 

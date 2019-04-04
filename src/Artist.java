@@ -1,6 +1,3 @@
-//package MusicMetadata;
-
-
 public class Artist {
 	public String name;
 	public String terms;

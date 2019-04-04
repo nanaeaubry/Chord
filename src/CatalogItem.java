@@ -1,5 +1,3 @@
-//package MusicMetadata;
-
 import java.util.Comparator;
 import com.google.gson.JsonObject;
 
